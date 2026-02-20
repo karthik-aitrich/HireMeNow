@@ -1,0 +1,100 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
+    <PackageReference Include="MailKit" Version="4.8.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="MimeKit" Version="4.8.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="API\AuthUserss\DTO\ResponseObject\" />
+    <Folder Include="API\AuthUserss\DTO\RequestObject\" />
+    <Folder Include="API\AuthUserss\Helper\" />
+    <Folder Include="API\AuthUserss\Controller\" />
+    <Folder Include="API\CompanyUserss\Controller\" />
+    <Folder Include="API\CompanyUserss\DTO\ResponseObject\" />
+    <Folder Include="API\CompanyUserss\DTO\RequestObject\" />
+    <Folder Include="API\CompanyUserss\Helper\" />
+    <Folder Include="API\Industryss\DTO\ResponseObject\" />
+    <Folder Include="API\Industryss\DTO\RequestObject\" />
+    <Folder Include="API\Industryss\Controller\" />
+    <Folder Include="API\Industryss\Helper\" />
+    <Folder Include="API\JobCategoryss\DTO\ResponseObject\" />
+    <Folder Include="API\JobCategoryss\DTO\RequestObject\" />
+    <Folder Include="API\JobCategoryss\Helper\" />
+    <Folder Include="API\JobCategoryss\Controller\" />
+    <Folder Include="API\JobPostss\DTO\ResponseObject\" />
+    <Folder Include="API\JobPostss\DTO\RequestObject\" />
+    <Folder Include="API\JobPostss\Helper\" />
+    <Folder Include="API\JobPostss\Controller\" />
+    <Folder Include="API\JobProviderCompanyss\DTO\ResponseObject\" />
+    <Folder Include="API\JobProviderCompanyss\DTO\RequestObject\" />
+    <Folder Include="API\JobProviderCompanyss\Helper\" />
+    <Folder Include="API\JobProviderCompanyss\Controller\" />
+    <Folder Include="API\JobResponsibilityss\DTO\ResponseObject\" />
+    <Folder Include="API\JobResponsibilityss\DTO\RequestObject\" />
+    <Folder Include="API\JobResponsibilityss\Helper\" />
+    <Folder Include="API\JobResponsibilityss\Controller\" />
+    <Folder Include="API\JobSeekerProfiless\DTO\ResponseObject\" />
+    <Folder Include="API\JobSeekerProfiless\DTO\RequestObject\" />
+    <Folder Include="API\JobSeekerProfiless\Helper\" />
+    <Folder Include="API\JobSeekerProfiless\Controller\" />
+    <Folder Include="API\JobSeekerss\DTO\ResponseObject\" />
+    <Folder Include="API\JobSeekerss\DTO\RequestObject\" />
+    <Folder Include="API\JobSeekerss\Helper\" />
+    <Folder Include="API\JobSeekerss\Controller\" />
+    <Folder Include="API\Locationss\DTO\ResponseObjetc\" />
+    <Folder Include="API\Locationss\DTO\RequestObject\" />
+    <Folder Include="API\Locationss\Helper\" />
+    <Folder Include="API\Locationss\Controller\" />
+    <Folder Include="API\Qualificationss\DTO\ResponseObject\" />
+    <Folder Include="API\Qualificationss\DTO\RequestObject\" />
+    <Folder Include="API\Qualificationss\Helper\" />
+    <Folder Include="API\Qualificationss\Controller\" />
+    <Folder Include="API\Resumess\Controller\" />
+    <Folder Include="API\Resumess\DTO\ResponseObject\" />
+    <Folder Include="API\Resumess\DTO\RequestObject\" />
+    <Folder Include="API\Resumess\Helper\" />
+    <Folder Include="API\Roless\Controller\" />
+    <Folder Include="API\Roless\DTO\ResponseObject\" />
+    <Folder Include="API\Roless\DTO\RequestObject\" />
+    <Folder Include="API\Roless\Helper\" />
+    <Folder Include="API\Skillss\Controller\" />
+    <Folder Include="API\Skillss\DTO\ResponseObject\" />
+    <Folder Include="API\Skillss\DTO\RequestObject\" />
+    <Folder Include="API\Skillss\Helper\" />
+    <Folder Include="API\SystemUserss\Controller\" />
+    <Folder Include="API\SystemUserss\DTO\ResponseObject\" />
+    <Folder Include="API\SystemUserss\DTO\RequestObject\" />
+    <Folder Include="API\SystemUserss\Helper\" />
+    <Folder Include="API\WorkExperiencess\DTO\ResponseObject\" />
+    <Folder Include="API\WorkExperiencess\DTO\RequestObject\" />
+    <Folder Include="API\WorkExperiencess\Helper\" />
+    <Folder Include="API\WorkExperiencess\Controller\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,6 @@
+@_Hire_Me_Now__HostAddress = http://localhost:5111
+
+GET {{_Hire_Me_Now__HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
