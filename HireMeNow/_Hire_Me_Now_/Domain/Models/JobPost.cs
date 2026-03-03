@@ -5,6 +5,7 @@ namespace Domain.Models;
 
 public partial class JobPost
 {
+    public Guid ProviderId { get; set; }
     public Guid Id { get; set; }
 
     public string JobTitle { get; set; } = null!;

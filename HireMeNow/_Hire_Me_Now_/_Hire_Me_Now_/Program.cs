@@ -1,4 +1,5 @@
 using _Hire_Me_Now_.Extension;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddAppService(builder.Configuration);
+
+
+
+
 
 var app = builder.Build();
 

@@ -23,7 +23,7 @@
     </PackageReference>
     <PackageReference Include="MimeKit" Version="4.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,8 +32,6 @@
 
   <ItemGroup>
     <Folder Include="API\AuthUserss\DTO\ResponseObject\" />
-    <Folder Include="API\AuthUserss\DTO\RequestObject\" />
-    <Folder Include="API\AuthUserss\Helper\" />
     <Folder Include="API\AuthUserss\Controller\" />
     <Folder Include="API\CompanyUserss\Controller\" />
     <Folder Include="API\CompanyUserss\DTO\ResponseObject\" />
@@ -63,10 +61,8 @@
     <Folder Include="API\JobSeekerProfiless\DTO\RequestObject\" />
     <Folder Include="API\JobSeekerProfiless\Helper\" />
     <Folder Include="API\JobSeekerProfiless\Controller\" />
-    <Folder Include="API\JobSeekerss\DTO\ResponseObject\" />
-    <Folder Include="API\JobSeekerss\DTO\RequestObject\" />
-    <Folder Include="API\JobSeekerss\Helper\" />
-    <Folder Include="API\JobSeekerss\Controller\" />
+    <Folder Include="API\JobSeekers\DTO\RequestObject\" />
+    <Folder Include="API\JobSeekers\Helper\" />
     <Folder Include="API\Locationss\DTO\ResponseObjetc\" />
     <Folder Include="API\Locationss\DTO\RequestObject\" />
     <Folder Include="API\Locationss\Helper\" />
