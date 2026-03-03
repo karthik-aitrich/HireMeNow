@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services.WorkExperiences.DTO
+namespace Domain.Enums
 {
-    internal class WorkExperiencesDto
+    public enum InterviewStatus
     {
+        SCHEDULED,
+        COMPLETED,
+        CANCELLED
     }
 }

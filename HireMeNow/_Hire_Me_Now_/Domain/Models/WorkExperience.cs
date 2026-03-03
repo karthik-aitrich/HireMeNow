@@ -1,13 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Domain.Models;
 
 public partial class WorkExperience
 {
-    public Guid Id { get; set; }
+    public Guid WorkId { get; set; }
+
+
 
     public Guid JobSeekerProfileId { get; set; }
+
+    [ForeignKey(nameof(JobSeekerProfileId))]
+    public virtual JobSeekerProfile JobSeekerProfile { get; set; } = null!;
+
+
+
 
     public string JobTitle { get; set; } = null!;
 
@@ -19,5 +28,5 @@ public partial class WorkExperience
 
     public DateTime ServiceEnd { get; set; }
 
-    public virtual JobSeekerProfile JobSeekerProfile { get; set; } = null!;
+  
 }
