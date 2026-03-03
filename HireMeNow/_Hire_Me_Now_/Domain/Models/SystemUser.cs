@@ -18,10 +18,12 @@ public partial class SystemUser
     public string Email { get; set; } = null!;
 
     public int Role { get; set; }
+    public bool IsBlocked {  get; set; }=false;
 
     public virtual AuthUser? AuthUserIdNavigation { get; set; }
 
     public virtual ICollection<AuthUser> AuthUserSystemUsers { get; set; } = new List<AuthUser>();
 
     public virtual JobSeeker? JobSeeker { get; set; }
+
 }

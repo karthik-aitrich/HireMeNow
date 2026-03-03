@@ -7,9 +7,9 @@ public partial class Location
 {
     public Guid Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string? Name { get; set; }
 
-    public string Discription { get; set; } = null!;
+    public string? Discription { get; set; }
 
     public virtual ICollection<JobPost> JobPosts { get; set; } = new List<JobPost>();
 

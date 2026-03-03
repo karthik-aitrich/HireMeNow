@@ -4,9 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services.JobPosts.Service
+namespace Domain.Enums
 {
-    internal class JobPostsSerice
+    public enum JobMode
     {
+        Onsite=0,
+        Remote=1,
+        Hybrid=2
     }
 }
