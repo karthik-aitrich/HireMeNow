@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Services.JobSeekers.Interface
+namespace Domain.Services.JobsApplication.Dto
 {
-    internal interface IJobSeekersService
+    internal class ProviderApplicationDto
     {
     }
 }

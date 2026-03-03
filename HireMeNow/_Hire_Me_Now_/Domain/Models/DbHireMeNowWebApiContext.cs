@@ -6,6 +6,7 @@ namespace Domain.Models;
 
 public partial class DbHireMeNowWebApiContext : DbContext
 {
+
     public DbHireMeNowWebApiContext()
     {
     }
@@ -15,6 +16,7 @@ public partial class DbHireMeNowWebApiContext : DbContext
     {
     }
 
+    public virtual DbSet<JobApplication> JobApplications { get; set; }
     public virtual DbSet<AuthUser> AuthUsers { get; set; }
 
     public virtual DbSet<CompanyUser> CompanyUsers { get; set; }
@@ -53,9 +55,19 @@ public partial class DbHireMeNowWebApiContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-U4ASAR7;Initial Catalog=HIREMENOW_DB;Integrated Security=True;Encrypt=True;Trust Server Certificate=True");
+//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+//        => optionsBuilder.UseSqlServer("Data Source=APPU;Initial Catalog=DB_HireMeNow_WebApi;Integrated Security=True;Trust Server Certificate=True");
+
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+
+
+
+
+
         modelBuilder.Entity<AuthUser>(entity =>
         {
             entity.ToTable("AuthUser");
