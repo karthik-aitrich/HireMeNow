@@ -1,289 +1,255 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace Domain.Models;
 
 public partial class DbHireMeNowWebApiContext : DbContext
 {
-    public DbHireMeNowWebApiContext()
-    {
-    }
-
     public DbHireMeNowWebApiContext(DbContextOptions<DbHireMeNowWebApiContext> options)
         : base(options)
     {
     }
 
-    public virtual DbSet<AuthUser> AuthUsers { get; set; }
-
-    public virtual DbSet<CompanyUser> CompanyUsers { get; set; }
-
-    public virtual DbSet<Industry> Industries { get; set; }
-
-    public virtual DbSet<JobCategory> JobCategories { get; set; }
-
-    public virtual DbSet<JobPost> JobPosts { get; set; }
-
-    public virtual DbSet<JobProviderCompany> JobProviderCompanies { get; set; }
-
-    public virtual DbSet<JobResponsibility> JobResponsibilities { get; set; }
-
-    public virtual DbSet<JobSeeker> JobSeekers { get; set; }
-
-    public virtual DbSet<JobSeekerProfile> JobSeekerProfiles { get; set; }
-
-    public virtual DbSet<Location> Locations { get; set; }
-
-    public virtual DbSet<Qualification> Qualifications { get; set; }
-
-    public virtual DbSet<Resume> Resumes { get; set; }
-
-    public virtual DbSet<Role> Roles { get; set; }
-
-    public virtual DbSet<Skill> Skills { get; set; }
-
-    public virtual DbSet<SystemUser> SystemUsers { get; set; }
-
-    public virtual DbSet<WorkExperience> WorkExperiences { get; set; }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Data Source=APPU;Initial Catalog=DB_HireMeNow_WebApi;Integrated Security=True;Trust Server Certificate=True");
+    public DbSet<AuthUser> AuthUsers { get; set; }
+    public DbSet<CompanyUser> CompanyUsers { get; set; }
+    public DbSet<Industry> Industries { get; set; }
+    public DbSet<JobCategory> JobCategories { get; set; }
+    public DbSet<JobPost> JobPosts { get; set; }
+    public DbSet<JobProviderCompany> JobProviderCompanies { get; set; }
+    public DbSet<JobResponsibility> JobResponsibilities { get; set; }
+    public DbSet<JobSeeker> JobSeekers { get; set; }
+    public DbSet<JobSeekerProfile> JobSeekerProfiles { get; set; }
+    public DbSet<Location> Locations { get; set; }
+    public DbSet<Qualification> Qualifications { get; set; }
+    public DbSet<Resume> Resumes { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<Skill> Skills { get; set; }
+    public DbSet<SystemUser> SystemUsers { get; set; }
+    public DbSet<WorkExperience> WorkExperiences { get; set; }
+    public DbSet<Applicationn> Applications { get; set; }
+    public DbSet<Interview> Interviews { get; set; }
+    public DbSet<CandidateReview> CandidateReviews { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+
+        // ================= GLOBAL GUID AUTO GENERATION =================
+        foreach (var entity in modelBuilder.Model.GetEntityTypes())
+        {
+            var idProp = entity.FindProperty("Id");
+            if (idProp != null && idProp.ClrType == typeof(Guid))
+            {
+                idProp.SetDefaultValueSql("NEWID()");
+            }
+        }
+
+        // ================= AUTH USER =================
         modelBuilder.Entity<AuthUser>(entity =>
         {
-            entity.ToTable("AuthUser");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id)
+                  .HasDefaultValueSql("NEWID()");
 
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.AuthUserIdNavigation).HasForeignKey<AuthUser>(d => d.Id);
-
-            entity.HasOne(d => d.SystemUser).WithMany(p => p.AuthUserSystemUsers)
-                .HasForeignKey(d => d.SystemUserId)
-                .OnDelete(DeleteBehavior.ClientSetNull);
+            entity.HasOne(d => d.SystemUser)
+                  .WithOne(p => p.AuthUser)
+                  .HasForeignKey<AuthUser>(d => d.SystemUserId)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
-        modelBuilder.Entity<CompanyUser>(entity =>
-        {
-            entity.ToTable("CompanyUser");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.CompanyNavigation).WithMany(p => p.CompanyUsers)
-                .HasForeignKey(d => d.Company)
-                .HasConstraintName("FK_CompanyUser_JobProviderCompany");
-        });
-
-        modelBuilder.Entity<Industry>(entity =>
-        {
-            entity.ToTable("Industry");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<JobCategory>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("JobCategory");
-
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<JobPost>(entity =>
-        {
-            entity.ToTable("JobPost");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.JobSummary).HasMaxLength(50);
-            entity.Property(e => e.JobTitle)
-                .HasMaxLength(10)
-                .IsFixedLength();
-            entity.Property(e => e.PostedDate).HasColumnType("datetime");
-
-            entity.HasOne(d => d.JobLocationNavigation).WithMany(p => p.JobPosts)
-                .HasForeignKey(d => d.JobLocation)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_JobPost_Location");
-
-            entity.HasOne(d => d.PostedByNavigation).WithMany(p => p.JobPosts)
-                .HasForeignKey(d => d.PostedBy)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_JobPost_Industry");
-        });
-
-        modelBuilder.Entity<JobProviderCompany>(entity =>
-        {
-            entity.ToTable("JobProviderCompany");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Address)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Email)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.LegalName)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Summary)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Website)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
-            entity.HasOne(d => d.LocationNavigation).WithMany(p => p.JobProviderCompanies)
-                .HasForeignKey(d => d.Location)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_JobProviderCompany_Location");
-        });
-
-        modelBuilder.Entity<JobResponsibility>(entity =>
-        {
-            entity.ToTable("JobResponsibility");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Description)
-                .HasMaxLength(10)
-                .IsFixedLength();
-            entity.Property(e => e.Name)
-                .HasMaxLength(10)
-                .IsFixedLength();
-
-            entity.HasOne(d => d.JobPostNavigation).WithMany(p => p.JobResponsibilities)
-                .HasForeignKey(d => d.JobPost)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_JobResponsibility_JobPost");
-        });
-
-        modelBuilder.Entity<JobSeeker>(entity =>
-        {
-            entity.ToTable("JobSeeker");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Email).HasMaxLength(450);
-
-            entity.HasOne(d => d.IdNavigation).WithOne(p => p.JobSeeker).HasForeignKey<JobSeeker>(d => d.Id);
-        });
-
-        modelBuilder.Entity<JobSeekerProfile>(entity =>
-        {
-            entity.ToTable("JobSeekerProfile");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.Resume).WithMany(p => p.JobSeekerProfiles).HasForeignKey(d => d.ResumeId);
-        });
-
-        modelBuilder.Entity<Location>(entity =>
-        {
-            entity.ToTable("Location");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Discription)
-                .HasMaxLength(10)
-                .IsFixedLength();
-            entity.Property(e => e.Name)
-                .HasMaxLength(10)
-                .IsFixedLength();
-        });
-
-        modelBuilder.Entity<Qualification>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("Qualification");
-
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
-            entity.HasOne(d => d.JobPost).WithMany()
-                .HasForeignKey(d => d.JobPostId)
-                .HasConstraintName("FK_Qualification_JobSeekerProfile");
-        });
-
-        modelBuilder.Entity<Resume>(entity =>
-        {
-            entity.ToTable("Resume");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-        });
-
-        modelBuilder.Entity<Role>(entity =>
-        {
-            entity
-                .HasNoKey()
-                .ToTable("Role");
-
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-        });
-
-        modelBuilder.Entity<Skill>(entity =>
-        {
-            entity.ToTable("Skill");
-
-            entity.Property(e => e.Id).ValueGeneratedNever();
-            entity.Property(e => e.Description)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-            entity.Property(e => e.Name)
-                .HasMaxLength(50)
-                .IsUnicode(false);
-
-            entity.HasOne(d => d.JobPostNavigation).WithMany(p => p.Skills)
-                .HasForeignKey(d => d.JobPost)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_Skill_JobSeekerProfile1");
-        });
-
+        // ================= SYSTEM USER =================
         modelBuilder.Entity<SystemUser>(entity =>
         {
-            entity.ToTable("SystemUser");
+            entity.HasKey(e => e.Id);
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
+            entity.Property(e => e.Id)
+                  .HasDefaultValueSql("NEWID()");
+
             entity.Property(e => e.Email).HasMaxLength(450);
         });
 
-        modelBuilder.Entity<WorkExperience>(entity =>
+        // ================= JOB SEEKER (Shared PK with SystemUser) =================
+        modelBuilder.Entity<JobSeeker>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK_Experiences");
+            entity.HasKey(e => e.Id);
 
-            entity.ToTable("WorkExperience");
+            entity.Property(e => e.Id)
+                  .ValueGeneratedNever(); // shared PK
 
-            entity.Property(e => e.Id).ValueGeneratedNever();
-
-            entity.HasOne(d => d.JobSeekerProfile).WithMany(p => p.WorkExperiences)
-                .HasForeignKey(d => d.JobSeekerProfileId)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK_WorkExperience_JobSeekerProfile");
+            entity.HasOne(d => d.SystemUser)
+                  .WithOne(p => p.JobSeeker)
+                  .HasForeignKey<JobSeeker>(d => d.Id)
+                  .OnDelete(DeleteBehavior.Cascade);
         });
 
-        OnModelCreatingPartial(modelBuilder);
-    }
+        // ================= INDUSTRY =================
+        modelBuilder.Entity<Industry>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+        });
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
+        // ================= JOB CATEGORY =================
+        modelBuilder.Entity<JobCategory>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+        });
+
+        // ================= LOCATION =================
+        modelBuilder.Entity<Location>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+        });
+
+        // ================= JOB PROVIDER COMPANY =================
+        modelBuilder.Entity<JobProviderCompany>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.LocationNavigation)
+                  .WithMany(p => p.JobProviderCompanies)
+                  .HasForeignKey(d => d.Location)
+                  .OnDelete(DeleteBehavior.ClientSetNull);
+        });
+
+        // ================= COMPANY USER =================
+        modelBuilder.Entity<CompanyUser>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.CompanyNavigation)
+                  .WithMany(p => p.CompanyUsers)
+                  .HasForeignKey(d => d.Company);
+        });
+
+        // ================= JOB POST =================
+        modelBuilder.Entity<JobPost>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                  .ValueGeneratedOnAdd()
+                  .HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.JobLocationNavigation)
+                  .WithMany(p => p.JobPosts)
+                  .HasForeignKey(d => d.JobLocation)
+                  .OnDelete(DeleteBehavior.Restrict);
+
+            entity.HasOne(d => d.PostedByNavigation)
+                  .WithMany()
+                  .HasForeignKey(d => d.PostedBy)
+                  .OnDelete(DeleteBehavior.Restrict)
+                  .IsRequired();   // 🔥 important
+        });
+
+        // ================= JOB RESPONSIBILITY =================
+        modelBuilder.Entity<JobResponsibility>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.JobPostNavigation)
+                  .WithMany(p => p.JobResponsibilities)
+                  .HasForeignKey(d => d.JobPost)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ================= JOB SEEKER PROFILE =================
+        modelBuilder.Entity<JobSeekerProfile>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+        });
+
+        // ================= RESUME =================
+        modelBuilder.Entity<Resume>(entity =>
+        {
+            entity.HasKey(e => e.ResumeId);
+
+            entity.Property(e => e.ResumeId)
+                  .HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(r => r.JobSeekerProfile)
+                  .WithMany(p => p.Resumes)
+                  .HasForeignKey(r => r.SeekerProfileId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ================= QUALIFICATION =================
+        modelBuilder.Entity<Qualification>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).ValueGeneratedOnAdd().HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.JobPost)
+                  .WithMany(p => p.Qualifications)
+                  .HasForeignKey(d => d.JobPostId);
+
+            entity.HasOne(d => d.JobSeekerProfile)
+                  .WithMany(p => p.Qualifications)
+                  .HasForeignKey(d => d.JobSeekerProfileId);
+
+
+        });
+
+        // ================= SKILL =================
+        modelBuilder.Entity<Skill>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Id).HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.JobPostNavigation)
+                  .WithMany(p => p.Skills)
+                  .HasForeignKey(d => d.JobPost)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ================= WORK EXPERIENCE =================
+        modelBuilder.Entity<WorkExperience>(entity =>
+        {
+            entity.HasKey(e => e.WorkId);
+            entity.Property(e => e.WorkId).HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.JobSeekerProfile)
+                  .WithMany(p => p.WorkExperiences)
+                  .HasForeignKey(d => d.JobSeekerProfileId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ================= APPLICATION =================
+        modelBuilder.Entity<Applicationn>(entity =>
+        {
+            entity.HasKey(e => e.ApplicationId);
+
+            entity.Property(e => e.ApplicationId)
+                  .HasDefaultValueSql("NEWID()");
+        });
+
+        // ================= INTERVIEW =================
+        modelBuilder.Entity<Interview>(entity =>
+        {
+            entity.HasKey(e => e.InterviewId); // ✅ FIXED
+
+            entity.Property(e => e.InterviewId)
+                  .HasDefaultValueSql("NEWID()");
+
+            entity.HasOne(d => d.Application)
+                  .WithMany(a => a.Interviews)
+                  .HasForeignKey(d => d.ApplicationId)
+                  .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        // ================= CANDIDATE REVIEW =================
+        modelBuilder.Entity<CandidateReview>(entity =>
+        {
+            entity.HasKey(e => e.ReviewId);
+
+            entity.Property(e => e.ReviewId)
+                  .HasDefaultValueSql("NEWID()");
+        });
+    }
 }

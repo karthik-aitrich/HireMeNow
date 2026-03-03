@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="API\Qualificationss\Helper\**" />
+    <Compile Remove="API\WorkExperiencess\,\**" />
+    <Content Remove="API\Qualificationss\Helper\**" />
+    <Content Remove="API\WorkExperiencess\,\**" />
+    <EmbeddedResource Remove="API\Qualificationss\Helper\**" />
+    <EmbeddedResource Remove="API\WorkExperiencess\,\**" />
+    <None Remove="API\Qualificationss\Helper\**" />
+    <None Remove="API\WorkExperiencess\,\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="API\Qualificationss\Helper\QualificationMappingProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MailKit" Version="4.8.0" />
@@ -71,14 +86,6 @@
     <Folder Include="API\Locationss\DTO\RequestObject\" />
     <Folder Include="API\Locationss\Helper\" />
     <Folder Include="API\Locationss\Controller\" />
-    <Folder Include="API\Qualificationss\DTO\ResponseObject\" />
-    <Folder Include="API\Qualificationss\DTO\RequestObject\" />
-    <Folder Include="API\Qualificationss\Helper\" />
-    <Folder Include="API\Qualificationss\Controller\" />
-    <Folder Include="API\Resumess\Controller\" />
-    <Folder Include="API\Resumess\DTO\ResponseObject\" />
-    <Folder Include="API\Resumess\DTO\RequestObject\" />
-    <Folder Include="API\Resumess\Helper\" />
     <Folder Include="API\Roless\Controller\" />
     <Folder Include="API\Roless\DTO\ResponseObject\" />
     <Folder Include="API\Roless\DTO\RequestObject\" />
@@ -91,10 +98,6 @@
     <Folder Include="API\SystemUserss\DTO\ResponseObject\" />
     <Folder Include="API\SystemUserss\DTO\RequestObject\" />
     <Folder Include="API\SystemUserss\Helper\" />
-    <Folder Include="API\WorkExperiencess\DTO\ResponseObject\" />
-    <Folder Include="API\WorkExperiencess\DTO\RequestObject\" />
-    <Folder Include="API\WorkExperiencess\Helper\" />
-    <Folder Include="API\WorkExperiencess\Controller\" />
   </ItemGroup>
 
 </Project>

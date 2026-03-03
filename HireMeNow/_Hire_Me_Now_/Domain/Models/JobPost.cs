@@ -27,7 +27,10 @@ public partial class JobPost
 
     public virtual ICollection<JobResponsibility> JobResponsibilities { get; set; } = new List<JobResponsibility>();
 
-    public virtual CompanyUser PostedByNavigation { get; set; } = null!;
+    public virtual SystemUser PostedByNavigation { get; set; }
 
     public virtual ICollection<Skill> Skills { get; set; } = new List<Skill>();
+    public virtual ICollection<Qualification> Qualifications { get; set; } = new List<Qualification>();
+    public virtual ICollection<Applicationn> Applications { get; set; } = new List<Applicationn>();
+
 }
