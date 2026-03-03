@@ -7,6 +7,21 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="API\Qualificationss\Helper\**" />
+    <Compile Remove="API\WorkExperiencess\,\**" />
+    <Content Remove="API\Qualificationss\Helper\**" />
+    <Content Remove="API\WorkExperiencess\,\**" />
+    <EmbeddedResource Remove="API\Qualificationss\Helper\**" />
+    <EmbeddedResource Remove="API\WorkExperiencess\,\**" />
+    <None Remove="API\Qualificationss\Helper\**" />
+    <None Remove="API\WorkExperiencess\,\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="API\Qualificationss\Helper\QualificationMappingProfile.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="13.0.1" />
     <PackageReference Include="BCrypt.Net-Next" Version="4.0.3" />
     <PackageReference Include="MailKit" Version="4.8.0" />
@@ -23,7 +38,7 @@
     </PackageReference>
     <PackageReference Include="MimeKit" Version="4.8.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="6.1.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,25 +47,11 @@
 
   <ItemGroup>
     <Folder Include="API\AuthUserss\DTO\ResponseObject\" />
-    <Folder Include="API\AuthUserss\DTO\RequestObject\" />
-    <Folder Include="API\AuthUserss\Helper\" />
     <Folder Include="API\AuthUserss\Controller\" />
     <Folder Include="API\CompanyUserss\Controller\" />
     <Folder Include="API\CompanyUserss\DTO\ResponseObject\" />
     <Folder Include="API\CompanyUserss\DTO\RequestObject\" />
     <Folder Include="API\CompanyUserss\Helper\" />
-    <Folder Include="API\Industryss\DTO\ResponseObject\" />
-    <Folder Include="API\Industryss\DTO\RequestObject\" />
-    <Folder Include="API\Industryss\Controller\" />
-    <Folder Include="API\Industryss\Helper\" />
-    <Folder Include="API\JobCategoryss\DTO\ResponseObject\" />
-    <Folder Include="API\JobCategoryss\DTO\RequestObject\" />
-    <Folder Include="API\JobCategoryss\Helper\" />
-    <Folder Include="API\JobCategoryss\Controller\" />
-    <Folder Include="API\JobPostss\DTO\ResponseObject\" />
-    <Folder Include="API\JobPostss\DTO\RequestObject\" />
-    <Folder Include="API\JobPostss\Helper\" />
-    <Folder Include="API\JobPostss\Controller\" />
     <Folder Include="API\JobProviderCompanyss\DTO\ResponseObject\" />
     <Folder Include="API\JobProviderCompanyss\DTO\RequestObject\" />
     <Folder Include="API\JobProviderCompanyss\Helper\" />
@@ -67,18 +68,12 @@
     <Folder Include="API\JobSeekerss\DTO\RequestObject\" />
     <Folder Include="API\JobSeekerss\Helper\" />
     <Folder Include="API\JobSeekerss\Controller\" />
+    <Folder Include="API\JobSeekers\DTO\RequestObject\" />
+    <Folder Include="API\JobSeekers\Helper\" />
     <Folder Include="API\Locationss\DTO\ResponseObjetc\" />
     <Folder Include="API\Locationss\DTO\RequestObject\" />
     <Folder Include="API\Locationss\Helper\" />
     <Folder Include="API\Locationss\Controller\" />
-    <Folder Include="API\Qualificationss\DTO\ResponseObject\" />
-    <Folder Include="API\Qualificationss\DTO\RequestObject\" />
-    <Folder Include="API\Qualificationss\Helper\" />
-    <Folder Include="API\Qualificationss\Controller\" />
-    <Folder Include="API\Resumess\Controller\" />
-    <Folder Include="API\Resumess\DTO\ResponseObject\" />
-    <Folder Include="API\Resumess\DTO\RequestObject\" />
-    <Folder Include="API\Resumess\Helper\" />
     <Folder Include="API\Roless\Controller\" />
     <Folder Include="API\Roless\DTO\ResponseObject\" />
     <Folder Include="API\Roless\DTO\RequestObject\" />
@@ -87,14 +82,15 @@
     <Folder Include="API\Skillss\DTO\ResponseObject\" />
     <Folder Include="API\Skillss\DTO\RequestObject\" />
     <Folder Include="API\Skillss\Helper\" />
-    <Folder Include="API\SystemUserss\Controller\" />
-    <Folder Include="API\SystemUserss\DTO\ResponseObject\" />
     <Folder Include="API\SystemUserss\DTO\RequestObject\" />
-    <Folder Include="API\SystemUserss\Helper\" />
+<<<<<<< HEAD
     <Folder Include="API\WorkExperiencess\DTO\ResponseObject\" />
     <Folder Include="API\WorkExperiencess\DTO\RequestObject\" />
     <Folder Include="API\WorkExperiencess\Helper\" />
     <Folder Include="API\WorkExperiencess\Controller\" />
+=======
+    <Folder Include="API\SystemUserss\Helper\" />
+>>>>>>> a25c62e1c15a69e5dcbea31b572306645d64fc78
   </ItemGroup>
 
 </Project>

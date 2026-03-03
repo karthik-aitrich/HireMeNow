@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace Domain.Services.JobCategorys.DTO
 {
-    internal class JobCategorysDto
+    public class JobCategorysDto
     {
+        public Guid Id { get; set; }
+    
+        public string? Name { get; set; }
+
+        public string? Description { get; set; }
     }
 }
