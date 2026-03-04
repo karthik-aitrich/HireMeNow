@@ -32,7 +32,7 @@ namespace Domain.Services.JobSeekers.Service
                 JobId = j.Id,
                 JobTitle = j.JobTitle,
                 JobSummary = j.JobSummary,
-                ProviderId = j.ProviderId,
+                ProviderId = j.PostedBy,
                 PostedDate = j.PostedDate
             }).ToList();
         }
@@ -49,7 +49,7 @@ namespace Domain.Services.JobSeekers.Service
                 JobId = job.Id,
                 JobTitle = job.JobTitle,
                 JobSummary = job.JobSummary,
-                ProviderId = job.ProviderId,
+                ProviderId = job.PostedBy,
                 PostedDate = job.PostedDate
             };
         }

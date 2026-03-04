@@ -41,7 +41,7 @@ namespace Domain.Services.JobApplication.Service
                 return false;
 
             if (application.Job == null ||
-                application.Job.ProviderId != dto.ProviderId)
+                application.Job.PostedBy != dto.ProviderId)
                 return false;
 
             application.Status = dto.Status;

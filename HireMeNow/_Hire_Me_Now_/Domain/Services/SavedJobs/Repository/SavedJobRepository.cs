@@ -34,19 +34,19 @@ namespace Domain.Services.SavedJobs.Repository
 
         public async Task<IEnumerable<SavedJob>> GetMySavedJobsAsync(Guid systemUserId)
         {
-            var savedJob=await _context.SavedJobs.Include(x=>x.JobPost).Where(x=>x.systemUserId== systemUserId && x.IsSaved).ToListAsync();
+            var savedJob=await _context.SavedJobs.Include(x=>x.JobPost).Where(x=>x.JobPostId== systemUserId && x.IsSaved).ToListAsync();
             return savedJob;
         }
 
         public async Task<SavedJob?> GetSavedJobByIdAsync(Guid savedJobId, Guid systemUserId)
         {
-            var savedJob =await _context.SavedJobs.Include(x => x.JobPost).FirstOrDefaultAsync(x => x.Id == savedJobId && x.systemUserId == systemUserId && x.IsSaved);
+            var savedJob =await _context.SavedJobs.Include(x => x.JobPost).FirstOrDefaultAsync(x => x.Id == savedJobId && x.JobPostId == systemUserId && x.IsSaved);
             return savedJob;
         }
 
         public async Task<SavedJob?> GetSavedJobAsync(Guid jobId, Guid systemUserId)
         {
-            var savedJob = await _context.SavedJobs.FirstOrDefaultAsync(x => x.JobPostId == jobId && x.systemUserId == systemUserId);
+            var savedJob = await _context.SavedJobs.FirstOrDefaultAsync(x => x.JobPostId == jobId && x.JobPostId == systemUserId);
             return savedJob;
         }
     }

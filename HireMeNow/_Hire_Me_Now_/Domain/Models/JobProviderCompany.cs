@@ -26,4 +26,6 @@ public partial class JobProviderCompany
     public virtual ICollection<CompanyUser> CompanyUsers { get; set; } = new List<CompanyUser>();
 
     public virtual Location LocationNavigation { get; set; } = null!;
+
+    public virtual ICollection<JobPost> JobPosts { get; set; } = new List<JobPost>();
 }
