@@ -24,7 +24,7 @@ namespace Domain.Services.JobsApplication.Repository
         {
             return await _context.JobApplications
                 .Include(a => a.Job)  
-                .Where(a => a.Job.ProviderId == providerId)
+                .Where(a => a.Job.PostedBy == providerId)
                 .ToListAsync();
         }
 

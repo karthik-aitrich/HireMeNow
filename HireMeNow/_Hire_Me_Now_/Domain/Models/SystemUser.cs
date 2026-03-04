@@ -18,6 +18,7 @@ public partial class SystemUser
     public virtual AuthUser? AuthUser { get; set; }
 
     public virtual JobSeeker? JobSeeker { get; set; }
+    public virtual ICollection<SavedJob> SavedJobs { get; set; } = new List<SavedJob>();
 }
 
 

@@ -15,4 +15,6 @@ public partial class JobSeekerProfile
 
     public virtual ICollection<WorkExperience> WorkExperiences { get; set; } = new List<WorkExperience>();
     public virtual ICollection<Qualification> Qualifications { get; set; } = new List<Qualification>();
+    public virtual ICollection<SavedJob> SavedJobs { get; set; } = new List<SavedJob>();
 }
+
